@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <wxARCH_SUFFIX Condition="'$(Platform)'!='Win32'">_$(Platform)</wxARCH_SUFFIX>
+    <wxCOMPILER_PREFIX>vc$(PlatformToolset)</wxCOMPILER_PREFIX>
+    <wxLIB_TYPE Condition="'$(wxLIB_TYPE)'==''">_lib</wxLIB_TYPE>
+    <wxLIB_DIR>$(MSBuildThisFileDirectory)lib\$(wxCOMPILER_PREFIX)$(wxARCH_SUFFIX)$(wxLIB_TYPE)</wxLIB_DIR>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include\msvc;$(MSBuildThisFileDirectory)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>wxMSVC_VERSION=$(PlatformToolset);__WXMSW__;wxUSE_GUI=1;wxUSE_NO_MANIFEST=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">__WXDEBUG__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(wxLIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>wxUSE_NO_MANIFEST=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
